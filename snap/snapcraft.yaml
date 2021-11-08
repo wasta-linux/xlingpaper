@@ -14,8 +14,16 @@ description: |
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
-
+apps:
+  xlingpaper:
+    command: bin/runxxe8
 parts:
   xlingpaper:
-    source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
     plugin: dump
+    source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
+    organize:
+      install4xxe8Perso: bin/
+      runxxe8: bin/
+    override-prime: |
+      snapcraftctl prime
+      echo -e '\nqy\n' | install4xxe8Perso
