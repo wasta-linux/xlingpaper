@@ -26,5 +26,7 @@ parts:
       runxxe8: bin/
     override-prime: |
       snapcraftctl prime
-      sed -r -i 's/^(less.*)$/# \1/g' /root/parts/xlingpaper/install/bin/install4xxe8Perso
+      sed -r -i 's/NAMEO=${HOME:6}/NAMEO=root/g' /root/stage/bin/install4xxe8Perso
+      sed -r -i 's/chown $NAMEO -R/chown -R $NAMEO/g' /root/stage/bin/install4xxe8Perso
+      sed -r -i 's/^(less.*)$/# \1/g' /root/stage/bin/install4xxe8Perso
       echo -e '\ny\n' | install4xxe8Perso
