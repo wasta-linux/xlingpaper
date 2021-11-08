@@ -24,6 +24,8 @@ parts:
     organize:
       install4xxe8Perso: bin/
       runxxe8: bin/
+    build-packages:
+      - unzip
     override-prime: |
       snapcraftctl prime
       sed -r -i 's/NAMEO=\$\{HOME:6\}/NAMEO=root/g' /root/stage/bin/install4xxe8Perso
