@@ -26,5 +26,5 @@ parts:
       runxxe8: bin/
     override-prime: |
       snapcraftctl prime
-      sed -ir 's/^(less.*)$/# \1/g' root/parts/xlingpaper/install/bin/install4xxe8Perso
+      sed -r -i 's/^(less.*)$/# \1/g' root/parts/xlingpaper/install/bin/install4xxe8Perso
       echo -e '\ny\n' | install4xxe8Perso
