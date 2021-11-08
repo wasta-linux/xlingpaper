@@ -24,6 +24,8 @@ parts:
     organize:
       install4xxe8Perso: bin/
       runxxe8: bin/
+    override-stage: |
+      sed -r 's/^(less.*)$/# \1/' bin/install4xxe8Perso
     override-prime: |
       snapcraftctl prime
-      echo -e '\nqy\n' | install4xxe8Perso
+      echo -e '\ny\n' | install4xxe8Perso
