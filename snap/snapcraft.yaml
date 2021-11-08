@@ -1,9 +1,11 @@
-name: xmlmind-xml-editor
+name: XLingPaper
 base: core18
 version: '0.1+git'
-summary: XMLmind XML Editor is a strictly validating, near WYSIWYG, XML editor
+summary: Produce linguistic documents with at least five outputs, all from the same source document.
 description: |
   This is an unofficial package.
+
+  XLingPaper is an add-on to XMLmind XML Editor.
 
   XMLmind XML Editor is a strictly validating, near WYSIWYG, XML editor, having:
   * Extensive DITA 1.3 support, including Lightweight DITA, XDITA, HDITA, MDITA.
