@@ -1,6 +1,6 @@
 name: xlingpaper
 base: core18
-version: '0.1+git'
+version: '0.1' # '0.1+git'
 summary: Produce linguistic documents with multiple outputs from one source document.
 description: |
   This is an unofficial package.
@@ -24,8 +24,7 @@ parts:
     organize:
       install4xxe8Perso: bin/
       runxxe8: bin/
-    override-stage: |
-      sed -r 's/^(less.*)$/# \1/' bin/install4xxe8Perso
     override-prime: |
       snapcraftctl prime
+      sed -ir 's/^(less.*)$/# \1/g' root/parts/xlingpaper/install/bin/install4xxe8Perso
       echo -e '\ny\n' | install4xxe8Perso
