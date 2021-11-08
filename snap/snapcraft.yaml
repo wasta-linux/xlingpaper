@@ -1,4 +1,4 @@
-name: XLingPaper
+name: xlingpaper
 base: core18
 version: '0.1+git'
 summary: Produce linguistic documents with at least five outputs, all from the same source document.
