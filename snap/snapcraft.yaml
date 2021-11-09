@@ -26,9 +26,43 @@ parts:
       runxxe8: bin/
     build-packages:
       - unzip
-    override-prime: |
-      snapcraftctl prime
-      sed -r -i 's/NAMEO=\$\{HOME:6\}/NAMEO=root/g' /root/stage/bin/install4xxe8Perso
-      sed -r -i 's/chown $NAMEO -R/chown -R $NAMEO/g' /root/stage/bin/install4xxe8Perso
-      sed -r -i 's/^(less.*)$/# \1/g' /root/stage/bin/install4xxe8Perso
-      echo -e '\ny\n' | install4xxe8Perso
+    override-build: |
+      snapcraftctl build
+      install_dir=$PWD
+      tar -xjf ./XXE8-2Installer.tar
+      unzip ./XXE8Installer/xxe-perso-8_2_0.zip -d /opt
+      ln -s /opt/xxe-perso-8_2_0/bin/xxe /usr/local/bin
+      mkdir -p -m777 /root/.xxe7/addon
+      cd /root/.xxe7/addon
+      tar -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
+      mkdir -p -m777 /root/.xxe8/addon
+      cd /root/.xxe7/addon
+      tar -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
+      unzip -q ${install_dir}/XXE8Installer/es_dictionary-8_2_0.zip
+      unzip -q ${install_dir}/XXE8Installer/fr_dictionary-8_2_0.zip
+      unzip -q ${install_dir}/XXE8Installer/fr_translation-8_2_0
+      unzip -q ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
+      cd $install_dir
+      tar -xzf ./texlive4xlingpaper.tar -C /opt
+      ln -s /opt/texlivexlingpaper/2009/bin/i386-linux /usr/texbinxlingpaper
+      cp ./XXE8Installer/preferences.properties /root/.xxe8
+      tar -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
+      LOC="/usr/local/share/applications"
+      if [ ! -d $LOC ]; then
+        mkdir $LOC
+      fi
+      echo "[Desktop Entry]">$LOC/XXE.desktop
+      echo "Name=XMLmind XML Editor">>$LOC/XXE.desktop
+      echo "Comment=Edit XML Data">>$LOC/XXE.desktop
+      echo "GenericName=XML Document editor">>$LOC/XXE.desktop
+      echo "GenericName[es]=Editor de archivos XML">>$LOC/XXE.desktop
+      echo "GenericName[fr]=Editeur de fichiers XML">>$LOC/XXE.desktop
+      echo "Exec=xxe %u">>$LOC/XXE.desktop
+      echo "Path=/opt/xxe-perso-8_2_0/bin">>$LOC/XXE.desktop
+      echo "Icon=/opt/xxe-perso-8_2_0/bin/icon/xxe.ico">>$LOC/XXE.desktop
+      echo "MimeType=text/xml;">>$LOC/XXE.desktop
+      echo "Terminal=false">>$LOC/XXE.desktop
+      echo "Type=Application">>$LOC/XXE.desktop
+      echo "Categories=GTK;GNOME;Office;Education">>$LOC/XXE.desktop
+      echo "StartupNotify=true">>$LOC/XXE.desktop
+      echo "text/xml=XXE.desktop">>$LOC/defaults.list
