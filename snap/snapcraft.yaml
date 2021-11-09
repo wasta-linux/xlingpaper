@@ -66,3 +66,5 @@ parts:
       echo "Categories=GTK;GNOME;Office;Education">>$LOC/XXE.desktop
       echo "StartupNotify=true">>$LOC/XXE.desktop
       echo "text/xml=XXE.desktop">>$LOC/defaults.list
+    stage-packages:
+      - openjdk-11-jre-headless
