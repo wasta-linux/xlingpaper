@@ -14,11 +14,7 @@ description: |
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
-layout:
-  /opt/xxe-perso-8_2_0/bin/xxe:
-    symlink: $SNAP/opt
-  /opt/texlivexlingpaper/2009/bin/i386-linux:
-    symlink: $SNAP/usr/texbinxlingpaper
+
 apps:
   xlingpaper:
     extensions:
@@ -27,6 +23,11 @@ apps:
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
       PATH: $JAVA_HOME/jre/bin:$PATH
+    layout:
+      /opt/xxe-perso-8_2_0/bin/xxe:
+        symlink: $SNAP/opt
+      /opt/texlivexlingpaper/2009/bin/i386-linux:
+        symlink: $SNAP/usr/texbinxlingpaper
     plugs:
       - home
 parts:
