@@ -95,4 +95,4 @@ parts:
       - $excluded-tarballs
       - $excluded-xxe-scripts
     stage-packages:
-      - openjdk-11-jre-headless
+      - openjdk-11-jre
