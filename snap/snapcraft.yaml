@@ -87,3 +87,8 @@ parts:
       echo "text/xml=XXE.desktop" >> $LOC/defaults.list
     stage-packages:
       - openjdk-11-jre-headless
+    override-stage: |
+      snapcraftctl stage
+      rm -f *.tar
+      rm -f runxxe*
+      rm -f install4xxe*
