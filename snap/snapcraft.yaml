@@ -92,7 +92,7 @@ parts:
       # echo "Type=Application" >> $LOC/XXE.desktop
       # echo "Categories=GTK;GNOME;Office;Education" >> $LOC/XXE.desktop
       # echo "StartupNotify=true" >> $LOC/XXE.desktop
-      echo "text/xml=XXE.desktop" >> $LOC/defaults.list
+      echo "text/xml=XXE.desktop" >> $SNAPCRAFT_PART_INSTALL/usr/share/applications/defaults.list
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
