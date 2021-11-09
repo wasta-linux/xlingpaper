@@ -22,10 +22,10 @@ layout:
 
 apps:
   xlingpaper:
-    command: bin/xxe
+    command: opt/xxe-perso-8_2_0/bin/xxe
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
-      PATH: $JAVA_HOME/jre/bin:$PATH
+      PATH: $JAVA_HOME/bin:$PATH
     extensions:
       - gnome-3-28
     plugs:
