@@ -47,8 +47,8 @@ parts:
       unzip -oq ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
       cd $install_dir
       tar --overwrite -xzf ./texlive4xlingpaper.tar -C /opt
-      if [ -f ${SNAP}/usr/texbinxlingpaper ]; then
-        rm ${SNAP}/usr/texbinxlingpaper
+      if [ -f /usr/texbinxlingpaper ]; then
+        rm /usr/texbinxlingpaper
       fi
       ln -s /opt/texlivexlingpaper/2009/bin/i386-linux /usr/texbinxlingpaper
       cp ./XXE8Installer/preferences.properties /root/.xxe8
