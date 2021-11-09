@@ -37,7 +37,7 @@ parts:
       tar --overwrite -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
       mkdir -p -m777 /root/.xxe8/addon
       cd /root/.xxe7/addon
-      tar -uxjf ${install_dir}/xlingpaperconfig-xxe7.tar
+      tar --overwrite -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
       unzip -q ${install_dir}/XXE8Installer/es_dictionary-8_2_0.zip
       unzip -q ${install_dir}/XXE8Installer/fr_dictionary-8_2_0.zip
       unzip -q ${install_dir}/XXE8Installer/fr_translation-8_2_0
