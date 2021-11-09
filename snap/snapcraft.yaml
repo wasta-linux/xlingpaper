@@ -28,14 +28,19 @@ parts:
   xlingpaper:
     plugin: dump
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
+    layout:
+      /opt/xxe-perso-8_2_0/bin/xxe:
+        symlink: $SNAP/opt
+      /opt/texlivexlingpaper/2009/bin/i386-linux:
+        symlink: $SNAP/usr/texbinxlingpaper
     build-packages:
       - unzip
     override-build: |
       snapcraftctl build
       install_dir=$PWD
       tar --overwrite -xjf ./XXE8-2Installer.tar
-      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/opt
-      ln -sf /opt/xxe-perso-8_2_0/bin/xxe ${SNAP}/bin
+      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d $SNAP/opt
+      # ln -sf /opt/xxe-perso-8_2_0/bin/xxe ${SNAP}/bin
       mkdir -p -m777 /root/.xxe7/addon
       cd /root/.xxe7/addon
       tar --overwrite -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
@@ -48,7 +53,7 @@ parts:
       unzip -oq ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
       cd $install_dir
       tar --overwrite -xzf ./texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
-      ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux $SNAPCRAFT_PART_INSTALL/usr/texbinxlingpaper
+      # ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux $SNAPCRAFT_PART_INSTALL/usr/texbinxlingpaper
       cp ./XXE8Installer/preferences.properties $SNAPCRAFT_PART_INSTALL/root/.xxe8
       mkdir -p -m777 /root/Documents
       tar --overwrite -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
