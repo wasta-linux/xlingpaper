@@ -43,7 +43,7 @@ parts:
       unzip -oq ${install_dir}/XXE8Installer/fr_translation-8_2_0
       unzip -oq ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
       cd $install_dir
-      tar --overwrite -xjf ./texlive4xlingpaper.tar -C /opt
+      tar --overwrite -xzf ./texlive4xlingpaper.tar -C /opt
       ln -s /opt/texlivexlingpaper/2009/bin/i386-linux /usr/texbinxlingpaper
       cp ./XXE8Installer/preferences.properties /root/.xxe8
       tar --overwrite -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
