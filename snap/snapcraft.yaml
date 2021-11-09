@@ -16,7 +16,14 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 apps:
   xlingpaper:
+    extensions:
+        - gnome-3-28
     command: bin/xxe
+    environment:
+      JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
+      PATH: $JAVA_HOME/jre/bin:$PATH
+    plugs:
+      - home
 parts:
   xlingpaper:
     plugin: dump
@@ -27,7 +34,7 @@ parts:
       snapcraftctl build
       install_dir=$PWD
       tar --overwrite -xjf ./XXE8-2Installer.tar
-      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d ${SNAP}/opt
+      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/opt
       ln -sf /opt/xxe-perso-8_2_0/bin/xxe ${SNAP}/bin
       mkdir -p -m777 /root/.xxe7/addon
       cd /root/.xxe7/addon
@@ -40,28 +47,28 @@ parts:
       unzip -oq ${install_dir}/XXE8Installer/fr_translation-8_2_0
       unzip -oq ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
       cd $install_dir
-      tar --overwrite -xzf ./texlive4xlingpaper.tar -C ${SNAP}/opt
-      ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux ${SNAP}/usr/texbinxlingpaper
-      cp ./XXE8Installer/preferences.properties /root/.xxe8
+      tar --overwrite -xzf ./texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
+      ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux $SNAPCRAFT_PART_INSTALL/usr/texbinxlingpaper
+      cp ./XXE8Installer/preferences.properties $SNAPCRAFT_PART_INSTALL/root/.xxe8
       mkdir -p -m777 /root/Documents
       tar --overwrite -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
-      LOC="${SNAP}/usr/local/share/applications"
+      LOC=$SNAPCRAFT_PART_INSTALL/usr/local/share/applications
       mkdir -p $LOC
-      echo "[Desktop Entry]">$LOC/XXE.desktop
-      echo "Name=XMLmind XML Editor">>$LOC/XXE.desktop
-      echo "Comment=Edit XML Data">>$LOC/XXE.desktop
-      echo "GenericName=XML Document editor">>$LOC/XXE.desktop
-      echo "GenericName[es]=Editor de archivos XML">>$LOC/XXE.desktop
-      echo "GenericName[fr]=Editeur de fichiers XML">>$LOC/XXE.desktop
-      echo "Exec=xxe %u">>$LOC/XXE.desktop
-      echo "Path=/opt/xxe-perso-8_2_0/bin">>$LOC/XXE.desktop
-      echo "Icon=/opt/xxe-perso-8_2_0/bin/icon/xxe.ico">>$LOC/XXE.desktop
-      echo "MimeType=text/xml;">>$LOC/XXE.desktop
-      echo "Terminal=false">>$LOC/XXE.desktop
-      echo "Type=Application">>$LOC/XXE.desktop
-      echo "Categories=GTK;GNOME;Office;Education">>$LOC/XXE.desktop
-      echo "StartupNotify=true">>$LOC/XXE.desktop
-      echo "text/xml=XXE.desktop">>$LOC/defaults.list
-      rm *.tar
+      echo "[Desktop Entry]" > $LOC/XXE.desktop
+      echo "Name=XMLmind XML Editor" >> $LOC/XXE.desktop
+      echo "Comment=Edit XML Data" >> $LOC/XXE.desktop
+      echo "GenericName=XML Document editor" >> $LOC/XXE.desktop
+      echo "GenericName[es]=Editor de archivos XML" >> $LOC/XXE.desktop
+      echo "GenericName[fr]=Editeur de fichiers XML" >> $LOC/XXE.desktop
+      echo "Exec=xxe %u" >> $LOC/XXE.desktop
+      echo "Path=/opt/xxe-perso-8_2_0/bin" >> $LOC/XXE.desktop
+      echo "Icon=/opt/xxe-perso-8_2_0/bin/icon/xxe.ico" >> $LOC/XXE.desktop
+      echo "MimeType=text/xml;" >> $LOC/XXE.desktop
+      echo "Terminal=false" >> $LOC/XXE.desktop
+      echo "Type=Application" >> $LOC/XXE.desktop
+      echo "Categories=GTK;GNOME;Office;Education" >> $LOC/XXE.desktop
+      echo "StartupNotify=true" >> $LOC/XXE.desktop
+      echo "text/xml=XXE.desktop" >> $LOC/defaults.list
+      rm *.tar *.zip
     stage-packages:
       - openjdk-11-jre-headless
