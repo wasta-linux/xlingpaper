@@ -39,7 +39,7 @@ parts:
       snapcraftctl build
       install_dir=$PWD
       tar --overwrite -xjf ./XXE8-2Installer.tar
-      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d $SNAP/opt
+      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/opt
       # ln -sf /opt/xxe-perso-8_2_0/bin/xxe ${SNAP}/bin
       mkdir -p -m777 /root/.xxe7/addon
       cd /root/.xxe7/addon
