@@ -16,22 +16,19 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 apps:
   xlingpaper:
-    command: bin/runxxe8
+    command: bin/xxe
 parts:
   xlingpaper:
     plugin: dump
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
-    organize:
-      install4xxe8Perso: bin/
-      runxxe8: bin/
     build-packages:
       - unzip
     override-build: |
       snapcraftctl build
       install_dir=$PWD
       tar --overwrite -xjf ./XXE8-2Installer.tar
-      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d /opt
-      ln -sf /opt/xxe-perso-8_2_0/bin/xxe /bin
+      unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d ${SNAP}/opt
+      ln -sf /opt/xxe-perso-8_2_0/bin/xxe ${SNAP}/bin
       mkdir -p -m777 /root/.xxe7/addon
       cd /root/.xxe7/addon
       tar --overwrite -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
@@ -43,12 +40,12 @@ parts:
       unzip -oq ${install_dir}/XXE8Installer/fr_translation-8_2_0
       unzip -oq ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
       cd $install_dir
-      tar --overwrite -xzf ./texlive4xlingpaper.tar -C /opt
-      ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux /usr/texbinxlingpaper
+      tar --overwrite -xzf ./texlive4xlingpaper.tar -C ${SNAP}/opt
+      ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux ${SNAP}/usr/texbinxlingpaper
       cp ./XXE8Installer/preferences.properties /root/.xxe8
       mkdir -p -m777 /root/Documents
       tar --overwrite -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
-      LOC="/usr/local/share/applications"
+      LOC="${SNAP}/usr/local/share/applications"
       mkdir -p $LOC
       echo "[Desktop Entry]">$LOC/XXE.desktop
       echo "Name=XMLmind XML Editor">>$LOC/XXE.desktop
