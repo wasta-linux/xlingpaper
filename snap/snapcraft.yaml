@@ -49,6 +49,7 @@ parts:
       tar --overwrite -xzf ./texlive4xlingpaper.tar -C /opt
       ln -s /opt/texlivexlingpaper/2009/bin/i386-linux /usr/texbinxlingpaper
       cp ./XXE8Installer/preferences.properties /root/.xxe8
+      mkdir -m777 /root/Documents
       tar --overwrite -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
       LOC="/usr/local/share/applications"
       if [ ! -d $LOC ]; then
