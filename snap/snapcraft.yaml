@@ -30,7 +30,7 @@ parts:
       snapcraftctl build
       install_dir=$PWD
       tar --overwrite -xjf ./XXE8-2Installer.tar
-      unzip ./XXE8Installer/xxe-perso-8_2_0.zip -d /opt
+      unzip -o ./XXE8Installer/xxe-perso-8_2_0.zip -d /opt
       ln -s /opt/xxe-perso-8_2_0/bin/xxe /usr/local/bin
       mkdir -p -m777 /root/.xxe7/addon
       cd /root/.xxe7/addon
@@ -38,10 +38,10 @@ parts:
       mkdir -p -m777 /root/.xxe8/addon
       cd /root/.xxe7/addon
       tar --overwrite -xjf ${install_dir}/xlingpaperconfig-xxe7.tar
-      unzip -q ${install_dir}/XXE8Installer/es_dictionary-8_2_0.zip
-      unzip -q ${install_dir}/XXE8Installer/fr_dictionary-8_2_0.zip
-      unzip -q ${install_dir}/XXE8Installer/fr_translation-8_2_0
-      unzip -q ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
+      unzip -oq ${install_dir}/XXE8Installer/es_dictionary-8_2_0.zip
+      unzip -oq ${install_dir}/XXE8Installer/fr_dictionary-8_2_0.zip
+      unzip -oq ${install_dir}/XXE8Installer/fr_translation-8_2_0
+      unzip -oq ${install_dir}/XXE8Installer/sample_customize_xxe-8_2_0.zip
       cd $install_dir
       tar --overwrite -xjf ./texlive4xlingpaper.tar -C /opt
       ln -s /opt/texlivexlingpaper/2009/bin/i386-linux /usr/texbinxlingpaper
