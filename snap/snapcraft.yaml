@@ -54,10 +54,10 @@ parts:
       mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
       # cd /root/.xxe7/addon
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
-      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root.xxe8/addon
-      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_dictionary-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root.xxe8/addon
-      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_translation-8_2_0 -d $SNAPCRAFT_PART_INSTALL/root.xxe8/addon
-      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root.xxe8/addon
+      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
+      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_dictionary-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
+      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_translation-8_2_0 -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
+      unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
       # Part 4/6: Install texlive for XLingPaper.
       # cd $SNAPCRAFT_PART_BUILD
       mkdir -p $SNAPCRAFT_PART_INSTALL/opt
