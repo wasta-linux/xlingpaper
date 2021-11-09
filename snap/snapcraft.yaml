@@ -33,6 +33,8 @@ parts:
   xlingpaper:
     plugin: dump
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
+    organize:
+      XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8
     build-packages:
       - unzip
     override-build: |
@@ -54,7 +56,7 @@ parts:
       cd $install_dir
       tar --overwrite -xzf ./texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
       # ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux $SNAPCRAFT_PART_INSTALL/usr/texbinxlingpaper
-      cp ./XXE8Installer/preferences.properties $SNAPCRAFT_PART_INSTALL/root/.xxe8
+      # cp ./XXE8Installer/preferences.properties $SNAPCRAFT_PART_INSTALL/root/.xxe8
       mkdir -p -m777 /root/Documents
       tar --overwrite -xjf $install_dir/XLingPaperSample.tar -C /root/Documents
       LOC=$SNAPCRAFT_PART_INSTALL/usr/local/share/applications
