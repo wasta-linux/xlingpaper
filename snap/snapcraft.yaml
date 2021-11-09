@@ -22,12 +22,12 @@ layout:
 
 apps:
   xlingpaper:
-    extensions:
-        - gnome-3-28
     command: bin/xxe
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
       PATH: $JAVA_HOME/jre/bin:$PATH
+    extensions:
+      - gnome-3-28
     plugs:
       - home
 
@@ -37,6 +37,12 @@ parts:
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
     organize:
       XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8
+    filesets:
+      excluded-tarballs:
+        - -*.tar
+      excluded-xxe-scripts:
+        - -runxxe*
+        - -install4xxe*
     build-packages:
       - unzip
     override-build: |
@@ -85,10 +91,8 @@ parts:
       echo "Categories=GTK;GNOME;Office;Education" >> $LOC/XXE.desktop
       echo "StartupNotify=true" >> $LOC/XXE.desktop
       echo "text/xml=XXE.desktop" >> $LOC/defaults.list
+    stage:
+      - $excluded-tarballs
+      - $excluded-xxe-scripts
     stage-packages:
       - openjdk-11-jre-headless
-    override-stage: |
-      snapcraftctl stage
-      rm -f *.tar
-      rm -f runxxe*
-      rm -f install4xxe*
