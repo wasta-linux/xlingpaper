@@ -31,8 +31,8 @@ parts:
       install_dir=$PWD
       tar --overwrite -xjf ./XXE8-2Installer.tar
       unzip -oq ./XXE8Installer/xxe-perso-8_2_0.zip -d /opt
-      if [ -f ${SNAP}/bin/xxe ]; then
-        rm ${SNAP}/bin/xxe
+      if [ -f /bin/xxe ]; then
+        rm /bin/xxe
       fi
       ln -s /opt/xxe-perso-8_2_0/bin/xxe /bin
       mkdir -p -m777 /root/.xxe7/addon
