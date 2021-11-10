@@ -88,7 +88,6 @@ parts:
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
-      -
     stage-packages:
       - gedit
       - openjdk-11-jre
