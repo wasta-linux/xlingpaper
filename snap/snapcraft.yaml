@@ -107,6 +107,9 @@ parts:
     plugin: nil
     stage-packages:
       - zenity
+    prime:
+      - usr/bin/zenity
+      - usr/share/zenity/*
 
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
