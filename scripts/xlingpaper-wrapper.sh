@@ -8,7 +8,7 @@
 
 xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
 xxe_eula_name='XXEPersonalAndXLingPaperLicense'
-xxe_eula_file="${xxe_dir}/${xxe_eula_name}.txt"
+xxe_eula_file="${SNAP}/${xxe_eula_name}.txt"
 
 # Get EULA text; replace NBSP with normal space.
 # xxe_eula_text=$(sed -e 's/'$(echo "\xa0")'/ /g' "$xxe_ula_file")
@@ -17,6 +17,7 @@ xxe_eula_file="${xxe_dir}/${xxe_eula_name}.txt"
 accepted="${SNAP_USER_DATA}/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
     gedit "$xxe_eula_file" &
+    sleep 0.5
     zenity --question --width=200 \
         --text="The license agreement has been opened in another window.\n\nDo you accept the terms?"
     if [ $? -eq 0 ]; then
