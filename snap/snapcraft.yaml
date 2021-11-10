@@ -114,13 +114,21 @@ parts:
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
   cleanup: # very slow, ~2 or 3 min.
-    after: [xlingpaper]
+    after:
+      - texbin2020
+      - wrapper
+      - xlingpaper
+      - zenity
     plugin: nil
+    filesets:
+      excluded:
+        - -*.tar*
+        - -*.zip
+    stage:
+      - $excluded
     build-snaps: [core18, gnome-3-28-1804]
     override-prime: |
       set -eux
-      find . -name *.zip -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
-      find . -name *.tar* -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       for snap in "core18" "gnome-3-28-1804"; do
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
