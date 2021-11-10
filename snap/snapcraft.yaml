@@ -85,7 +85,7 @@ parts:
       - openjdk-11-jre
 
   desktop-file:
-    source: data/*.desktop
+    source: data/
     source-type: local
     plugin: dump
 
