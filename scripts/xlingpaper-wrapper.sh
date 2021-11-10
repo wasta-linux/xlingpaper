@@ -9,7 +9,6 @@
 xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
 xxe_eula_name='XXEPersonalAndXLingPaperLicense'
 xxe_eula_file="${xxe_dir}/${xxe_eula_name}.txt"
-xxe_prefs="${xxe_dir}/config/preferences.properties"
 
 # Get EULA text; replace NBSP with normal space.
 # xxe_eula_text=$(sed -e 's/'$(echo "\xa0")'/ /g' "$xxe_ula_file")
@@ -31,9 +30,18 @@ fi
 # Ensure default preferences are set.
 user_prefs="${SNAP_USER_DATA}/preferences.properties"
 if [ ! -f "$user_prefs" ]; then
-    cp "$xxe_prefs" "$prefs"
+    cp "${xxe_dir}/config/preferences.properties" "$prefs"
     # chown $USER:$USER "$prefs"
 fi
 
+# Copy examples into user data.
+example_file="${SNAP_USER_DATA}/examples/SamplePaper.xml"
+SHOW_EXAMPLE=''
+if [ ! -f "$example_file" ]; then
+    cp "${xxe_dir}/examples/SamplePaper.xml" "$example_file"
+    # chown $USER:$USER "$example_file"
+    SHOW_EXAMPLE="$example_file"
+fi
+
 # Launch XLingPaper/XMLMind XML Editor.
-${xxe_dir}/bin/xxe
+${xxe_dir}/bin/xxe "$SHOW_EXAMPLE"
