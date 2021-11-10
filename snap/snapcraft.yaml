@@ -76,8 +76,8 @@ parts:
 
     organize:
       XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8/
-      data/xxe.desktop: $SNAPCRAFT_PART_INSTALL/usr/share/applications/
-      data/xlingpaper.desktop: $SNAPCRAFT_PART_INSTALL/usr/share/applications/
+      data/xxe.desktop: usr/share/applications/
+      data/xlingpaper.desktop: usr/share/applications/
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
