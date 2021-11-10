@@ -15,10 +15,8 @@ description: |
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 layout:
-#  /opt/xxe-perso-8_2_0/bin/xxe:
-#    symlink: $SNAP/opt
   /opt/texlivexlingpaper/2009/bin/i386-linux:
-    symlink: $SNAP/usr/bin/texbinxlingpaper
+    symlink: $SNAP/usr/texbinxlingpaper
 
 apps:
   xlingpaper:
@@ -31,6 +29,7 @@ apps:
     plugs:
       - cups-control
       - home
+      - network
       - removable-media
 
 parts:
@@ -57,28 +56,18 @@ parts:
       # Part 3/6: Install XLingPaper config files.
       addons=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/addon
       mkdir -p $addons
-      # mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/root/.xxe7/addon
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $addons
-      # tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $SNAPCRAFT_PART_INSTALL/opt/.xxe7/addon
-
-      # mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
-      tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $addons
-      # tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $addons
-      # unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_dictionary-8_2_0.zip -d $addons
-      # unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_dictionary-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_translation-8_2_0 -d $addons
-      # unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_translation-8_2_0 -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $addons
-      # unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/root/.xxe8/addon
 
       # Part 4/6: Install texlive for XLingPaper.
       # mkdir -p $SNAPCRAFT_PART_INSTALL/opt
       tar --overwrite -xzf $SNAPCRAFT_PART_BUILD/texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
-      # ln -sf /opt/texlivexlingpaper/2009/bin/i386-linux $SNAPCRAFT_PART_INSTALL/usr/texbinxlingpaper
 
       # Part 5/6: Install XXE preferences.
+      # Handled in this part's "organize" key.
 
       # Part 6/6: Install sample XLingPaper document.
       mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/root/Documents
@@ -86,9 +75,9 @@ parts:
       echo "text/xml=xxe.desktop" >> $SNAPCRAFT_PART_INSTALL/usr/share/applications/defaults.list
 
     organize:
-      XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8
-      data/xxe.desktop: $SNAPCRAFT_PART_INSTALL/usr/share/applications
-      data/xlingpaper.desktop: $SNAPCRAFT_PART_INSTALL/usr/share/applications
+      XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8/
+      data/xxe.desktop: $SNAPCRAFT_PART_INSTALL/usr/share/applications/
+      data/xlingpaper.desktop: $SNAPCRAFT_PART_INSTALL/usr/share/applications/
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
