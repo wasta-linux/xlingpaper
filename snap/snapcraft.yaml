@@ -21,7 +21,7 @@ layout:
 apps:
   xlingpaper:
     # command: opt/xxe-perso-8_2_0/bin/xxe
-    command: scripts/xlingpaper-wrapper.sh
+    command: bin/xlingpaper-wrapper.sh
     # desktop: meta/gui/xlingpaper.desktop # if included as a separate part; https://forum.snapcraft.io/t/desktop-file-dropped-at-prime-step/6266
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
@@ -36,6 +36,12 @@ apps:
       - removable-media
 
 parts:
+  wrapper:
+    plugin: dump
+    source: scripts
+    organize:
+      xlingpaper-wrapper.sh: bin/xlingpaper-wrapper.sh
+
   xlingpaper:
     plugin: dump
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
@@ -49,8 +55,7 @@ parts:
       - unzip
     override-build: |
       snapcraftctl build
-      # Part 1/6: Accept license.
-      # Handled by xlingpaper-wrapper.sh.
+      # Part 1/6: Accept license: Handled by xlingpaper-wrapper.sh.
 
       # Part 2/6: Install XXE Personal.
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XXE8-2Installer.tar
@@ -58,7 +63,7 @@ parts:
 
       # Part 3/6: Install XLingPaper config files.
       xxe_base=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0
-      addons=$xxe_base/addon
+      addons=${xxe_base}/addon
       mkdir -p $addons
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $addons
@@ -67,15 +72,13 @@ parts:
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $addons
 
       # Part 4/6: Install texlive for XLingPaper.
-      # mkdir -p $SNAPCRAFT_PART_INSTALL/opt
       tar --overwrite -xzf $SNAPCRAFT_PART_BUILD/texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
 
-      # Part 5/6: Install XXE preferences.
-      # Handled by xlingpaper-wrapper.sh.
+      # Part 5/6: Install XXE preferences: Handled by xlingpaper-wrapper.sh.
 
       # Part 6/6: Install sample XLingPaper document.
-      mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/examples
-      tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XLingPaperSample.tar -C $SNAPCRAFT_PART_INSTALL/examples
+      # mkdir -p -m777 ${xxe_base}/examples
+      tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XLingPaperSample.tar -C ${xxe_base}/examples
       echo "text/xml=xxe.desktop" >> $SNAPCRAFT_PART_INSTALL/usr/share/applications/defaults.list
 
     organize:
@@ -88,6 +91,9 @@ parts:
       - gedit
       - openjdk-11-jre
       - zenity
+    # stage-snaps: # which is smaller, snaps or debs?
+    #   - gedit
+    #   - zenity
 
   # desktop-file: # only needed if not using snap/gui/*.desktop
   #   source: data/desktop-files
