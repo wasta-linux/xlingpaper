@@ -83,8 +83,8 @@ parts:
       echo "text/xml=xxe.desktop" >> $SNAPCRAFT_PART_INSTALL/usr/share/applications/defaults.list
 
     organize:
-      XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/config/
-      opt/xxe-perso-8_2_0/My_XLingPaper/SamplePaper.xml: $SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/examples/
+      $SNAPCRAFT_PART_BUILD/XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/config/
+      $SNAPCRAFT_PART_BUILD/opt/xxe-perso-8_2_0/My_XLingPaper/SamplePaper.xml: $SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/examples/
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
