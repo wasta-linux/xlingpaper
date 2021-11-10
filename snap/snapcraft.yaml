@@ -65,19 +65,20 @@ parts:
       # Part 3/6: Install XLingPaper config files.
       xxe_base=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0
       addons=${xxe_base}/addon
-      configs=${xxe_base}/config
-      mkdir -p -m777 "$addons" "$configs"
+      mkdir -p -m777 "$addons"
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_dictionary-8_2_0.zip -d $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_translation-8_2_0 -d $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $addons
-      cp $SNAPCRAFT_PART_BUILD/XXE8Installer/preferences.properties $configs
 
       # Part 4/6: Install texlive for XLingPaper: 64-bit version installed in own part.
       # tar --overwrite -xzf $SNAPCRAFT_PART_BUILD/texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
 
-      # Part 5/6: Install XXE preferences: Handled by xlingpaper-wrapper.sh.
+      # Part 5/6: Install XXE preferences: Handled by partly by xlingpaper-wrapper.sh.
+      configs=${xxe_base}/config
+      mkdir -p -m777 "$configs"
+      cp $SNAPCRAFT_PART_BUILD/XXE8Installer/preferences.properties $configs
 
       # Part 6/6: Install sample XLingPaper document.
       mkdir -p -m777 ${xxe_base}/examples
