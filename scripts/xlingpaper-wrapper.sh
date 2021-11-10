@@ -16,8 +16,8 @@ xxe_eula_file="${xxe_dir}/${xxe_eula_name}.txt"
 # Ensure that EULA has been accepted.
 accepted="${SNAP_USER_DATA}/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
-    gedit "$xxe_eula" &
-    zenity --question --text="The license agreement has been opened. Do you accept the terms?"
+    gedit "$xxe_eula_file" &
+    zenity --question --text="The license agreement has been opened in another window.\n\nDo you accept the terms?"
     if [ $? -eq 0 ]; then
         # User accepted.
         touch "$accepted"
