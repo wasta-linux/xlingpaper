@@ -77,7 +77,7 @@ parts:
       # Part 5/6: Install XXE preferences: Handled by xlingpaper-wrapper.sh.
 
       # Part 6/6: Install sample XLingPaper document.
-      # mkdir -p -m777 ${xxe_base}/examples
+      mkdir -p -m777 ${xxe_base}/examples
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XLingPaperSample.tar -C ${xxe_base}/examples
       echo "text/xml=xxe.desktop" >> $SNAPCRAFT_PART_INSTALL/usr/share/applications/defaults.list
 
