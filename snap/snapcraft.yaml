@@ -20,11 +20,13 @@ layout:
 
 apps:
   xlingpaper:
-    command: opt/xxe-perso-8_2_0/bin/xxe
+    # command: opt/xxe-perso-8_2_0/bin/xxe
+    command: scripts/xlingpaper-wrapper.sh
     # desktop: meta/gui/xlingpaper.desktop # if included as a separate part; https://forum.snapcraft.io/t/desktop-file-dropped-at-prime-step/6266
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
       PATH: $JAVA_HOME/bin:$PATH
+      XXE_PREFS_DIR: $SNAP_USER_DATA
     extensions:
       - gnome-3-28
     plugs:
@@ -48,14 +50,15 @@ parts:
     override-build: |
       snapcraftctl build
       # Part 1/6: Accept license.
-      # TODO at first run of app with a wrapper script & control file.
+      # Handled by xlingpaper-wrapper.sh.
 
       # Part 2/6: Install XXE Personal.
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XXE8-2Installer.tar
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/xxe-perso-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/opt
 
       # Part 3/6: Install XLingPaper config files.
-      addons=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/addon
+      xxe_base=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0
+      addons=$xxe_base/addon
       mkdir -p $addons
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/es_dictionary-8_2_0.zip -d $addons
@@ -68,7 +71,7 @@ parts:
       tar --overwrite -xzf $SNAPCRAFT_PART_BUILD/texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
 
       # Part 5/6: Install XXE preferences.
-      # Handled in this part's "organize" key.
+      # Handled by xlingpaper-wrapper.sh.
 
       # Part 6/6: Install sample XLingPaper document.
       mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/root/Documents
@@ -76,12 +79,14 @@ parts:
       echo "text/xml=xxe.desktop" >> $SNAPCRAFT_PART_INSTALL/usr/share/applications/defaults.list
 
     organize:
-      XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8/
+      XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/config/
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
     stage-packages:
+      - gedit
       - openjdk-11-jre
+      - zenity
 
   # desktop-file: # only needed if not using snap/gui/*.desktop
   #   source: data/desktop-files
