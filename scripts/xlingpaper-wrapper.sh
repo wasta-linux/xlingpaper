@@ -41,7 +41,7 @@ example_file="${SNAP_USER_DATA}/examples/SamplePaper.xml"
 SHOW_EXAMPLE=''
 if [ ! -f "$example_file" ]; then
     mkdir -p "${SNAP_USER_DATA}/examples"
-    cp "${xxe_dir}/examples/My_XLingPaper/SamplePaper.xml" "$example_file"
+    cp "${xxe_dir}/examples/SamplePaper.xml" "$example_file"
     SHOW_EXAMPLE="$example_file"
 fi
 
