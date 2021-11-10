@@ -76,13 +76,18 @@ parts:
 
     organize:
       XXE8Installer/preferences.properties: $SNAPCRAFT_PART_INSTALL/root/.xxe8/
-      data/xxe.desktop: usr/share/applications/
-      data/xlingpaper.desktop: usr/share/applications/
+#      data/xxe.desktop: usr/share/applications/
+#      data/xlingpaper.desktop: usr/share/applications/
     stage:
       - $excluded-tarballs
       - $excluded-xxe-scripts
     stage-packages:
       - openjdk-11-jre
+
+  desktop-file:
+    source: data/*.desktop
+    source-type: local
+    plugin: dump
 
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
