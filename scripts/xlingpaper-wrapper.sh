@@ -18,7 +18,7 @@ accepted="${SNAP_USER_DATA}/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
     gedit "$xxe_eula" &
     zenity --question --text="The license agreement has been opened. Do you accept the terms?"
-    if [ $? -ne 0 ]; then
+    if [ $? -eq 0 ]; then
         # User accepted.
         touch "$accepted"
     else
@@ -28,18 +28,17 @@ if [ ! -f "$accepted" ]; then
 fi
 
 # Ensure default preferences are set.
-user_prefs="${SNAP_USER_DATA}/preferences.properties"
+user_prefs="${SNAP_USER_DATA}/config/preferences.properties"
 if [ ! -f "$user_prefs" ]; then
-    cp "${xxe_dir}/config/preferences.properties" "$prefs"
-    # chown $USER:$USER "$prefs"
+    mkdir -p "${SNAP_USER_DATA}/config"
+    cp "${xxe_dir}/config/preferences.properties" "$user_prefs"
 fi
 
 # Copy examples into user data.
 example_file="${SNAP_USER_DATA}/examples/SamplePaper.xml"
 SHOW_EXAMPLE=''
 if [ ! -f "$example_file" ]; then
-    cp "${xxe_dir}/examples/SamplePaper.xml" "$example_file"
-    # chown $USER:$USER "$example_file"
+    cp "${xxe_dir}/examples/My_XLingPaper/SamplePaper.xml" "$example_file"
     SHOW_EXAMPLE="$example_file"
 fi
 

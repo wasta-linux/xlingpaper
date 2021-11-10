@@ -1,6 +1,6 @@
 name: xlingpaper
 base: core18
-version: '0.1' # '0.1+git'
+version: '3.9' # '0.1+git'
 summary: Produce linguistic documents with multiple outputs from one source document.
 description: |
   This is an unofficial package.
@@ -15,14 +15,15 @@ description: |
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 layout:
-  /opt/texlivexlingpaper/2009/bin/i386-linux:
-    symlink: $SNAP/usr/texbinxlingpaper
+  /opt/texlivexlingpaper2020/bin/x86_64-linux:
+    symlink: $SNAP/usr/texbinxlingpaper2020
+  # Fix resource relocation problem of zenity part
+  /usr/share/zenity:
+    symlink: $SNAP/usr/share/zenity
 
 apps:
   xlingpaper:
-    # command: opt/xxe-perso-8_2_0/bin/xxe
     command: bin/xlingpaper-wrapper.sh
-    # desktop: meta/gui/xlingpaper.desktop # if included as a separate part; https://forum.snapcraft.io/t/desktop-file-dropped-at-prime-step/6266
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
       PATH: $JAVA_HOME/bin:$PATH
@@ -71,8 +72,8 @@ parts:
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/fr_translation-8_2_0 -d $addons
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/sample_customize_xxe-8_2_0.zip -d $addons
 
-      # Part 4/6: Install texlive for XLingPaper.
-      tar --overwrite -xzf $SNAPCRAFT_PART_BUILD/texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
+      # Part 4/6: Install texlive for XLingPaper: 64-bit version installed in own part.
+      # tar --overwrite -xzf $SNAPCRAFT_PART_BUILD/texlive4xlingpaper.tar -C $SNAPCRAFT_PART_INSTALL/opt
 
       # Part 5/6: Install XXE preferences: Handled by xlingpaper-wrapper.sh.
 
@@ -90,15 +91,22 @@ parts:
     stage-packages:
       - gedit
       - openjdk-11-jre
-      - zenity
-    # stage-snaps: # which is smaller, snaps or debs?
-    #   - gedit
-    #   - zenity
 
-  # desktop-file: # only needed if not using snap/gui/*.desktop
-  #   source: data/desktop-files
-  #   source-type: local
-  #   plugin: dump
+  # https://software.sil.org/xlingpaper/xelatex-package-from-tex-live-2020/
+  texbin2020: # probably needed eventually
+    plugin: dump
+    source: http://software.sil.org/downloads/r/xlingpaper/resources/xelatex-upgrade/XeLaTeX2020Installer.tar.gz
+    override-build: |
+      snapcraftctl build
+      mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/opt
+      tar --overwrite -xzf $SNAPCRAFT_PART_INSTALL/texlivexlingpaper2020.tar -C $SNAPCRAFT_PART_INSTALL/opt
+
+  # Integrate custom dialogs in your snap - doc - snapcraft.io
+  # https://forum.snapcraft.io/t/integrate-custom-dialogs-in-your-snap/10825
+  zenity:
+    plugin: nil
+    stage-packages:
+      - zenity
 
   # Find files provided by the base and platform snap and ensure they aren't
   # duplicated in this snap
