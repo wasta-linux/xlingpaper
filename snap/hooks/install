@@ -1,28 +1,16 @@
 #!/bin/sh
 
-# Install hook for xlingpaper.
-#   - Present EULA on 1st run.
-#   - Create confirmation file if accepted.
-#   - Copy default preferences to $SNAP_USER_DATA if not present.
+# Install hook for xlingpaper. Only runs once at initial installation.
+
+# Mark 1st_run.
+touch "${SNAP_USER_DATA}/1st_run"
 
 xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
-xxe_eula_name='XXEPersonalAndXLingPaperLicense'
-xxe_eula_file="${xxe_dir}/${xxe_eula_name}.txt"
+eula='XXEPersonalAndXLingPaperLicense.txt'
 
-# Ensure that EULA has been accepted.
-accepted="${SNAP_USER_DATA}/${xxe_eula_name}_accepted"
-if [ ! -f "$accepted" ]; then
-    gedit "$xxe_eula_file" &
-    sleep 0.5
-    zenity --question --width=200 \
-        --text="The license agreement has been opened in another window.\n\nDo you accept the terms?"
-    if [ $? -eq 0 ]; then
-        # User accepted.
-        touch "$accepted"
-    else
-        # User declined or cancelled.
-        exit 1
-    fi
+# Ensure EULA in SNAP_USER_DATA.
+if [ ! -f "${SNAP_USER_DATA}/${eula}" ]; then
+    cp "${xxe_dir}/${eula}" "${SNAP_USER_DATA}/${eula}"
 fi
 
 # Ensure default preferences are set.
@@ -38,5 +26,3 @@ if [ ! -f "$example_file" ]; then
     mkdir -p "${SNAP_USER_DATA}/examples"
     cp "${xxe_dir}/examples/SamplePaper.xml" "$example_file"
 fi
-
-touch "${SNAP_USER_DATA}/show_example"
