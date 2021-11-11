@@ -49,7 +49,7 @@ if [ ! -f "$accepted" ]; then
 fi
 
 # Launch XLingPaper/XMLMind XML Editor.
-if [ "$first_run" == 'YES' ]; then
+if [ "$first_run" = 'YES' ]; then
     ${xxe_dir}/bin/xxe "${SNAP_USER_DATA}/examples/SamplePaper.xml"
     exit $?
 else
