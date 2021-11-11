@@ -28,6 +28,7 @@ apps:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
       PATH: $JAVA_HOME/bin:$PATH
       XXE_PREFS_DIR: $SNAP_USER_DATA/.config
+      XXE_ADDON_PATH: $SNAP_USER_DATA/.config/addon
     extensions:
       - gnome-3-28
     plugs:
