@@ -32,7 +32,7 @@ fi
 # xxe_eula_text=$(sed -e 's/'$(echo "\xa0")'/ /g' "$xxe_ula_file")
 
 # Ensure that EULA has been accepted.
-accepted="${SNAP_USER_DATA}/${xxe_eula_name}_accepted"
+accepted="${SNAP_USER_DATA}/.config/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
     first_run='YES'
     gedit "${SNAP_USER_DATA}/${eula}" &
