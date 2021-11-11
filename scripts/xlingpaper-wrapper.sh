@@ -36,6 +36,7 @@ accepted="${SNAP_USER_DATA}/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
     first_run='YES'
     gedit "${SNAP_USER_DATA}/${eula}" &
+    eula_pid=$!
     sleep 0.5
     zenity --question --width=300 \
         --title="License Agreement" \
@@ -43,6 +44,7 @@ if [ ! -f "$accepted" ]; then
     if [ $? -eq 0 ]; then
         # User accepted.
         touch "$accepted"
+        kill "$eula_pid"
     else
         # User declined or cancelled.
         exit 1
