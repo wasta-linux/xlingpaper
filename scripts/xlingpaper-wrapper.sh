@@ -38,6 +38,7 @@ if [ ! -f "$accepted" ]; then
     gedit "${SNAP_USER_DATA}/${eula}" &
     sleep 0.5
     zenity --question --width=300 \
+        --title="License Agreement" \
         --text="The license agreement has been opened in another window.\n\nDo you accept the terms?"
     if [ $? -eq 0 ]; then
         # User accepted.
