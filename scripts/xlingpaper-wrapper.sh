@@ -5,8 +5,8 @@
 #   - Open SamplePaper.xml on 1st run.
 
 SHOW_EXAMPLE=''
+xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
 if [ -f "${SNAP_USER_DATA}/1st_run" ]; then
-    xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
     xxe_eula_name='XXEPersonalAndXLingPaperLicense'
     xxe_eula_file="${xxe_dir}/${xxe_eula_name}.txt"
 
