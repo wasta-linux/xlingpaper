@@ -15,6 +15,8 @@ description: |
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 layout:
+  /opt/xxe-perso-8_2_0:
+    $SNAP/opt/xxe-perso-8_2_0
   /usr/texbinxlingpaper2020:
     symlink: $SNAP/opt/texlivexlingpaper2020/bin/x86_64-linux
   # Fix resource relocation problem of zenity part
@@ -33,9 +35,7 @@ apps:
     environment:
       JAVA_HOME: $SNAP/usr/lib/jvm/java-11-openjdk-amd64
       PATH: $JAVA_HOME/bin:$PATH
-      # PATH: $SNAP/opt/texlivexlingpaper2020/texmf-dist/tex:$PATH
       XXE_PREFS_DIR: $SNAP_USER_DATA/.config
-      # XXE_ADDON_PATH: $SNAP_USER_DATA/.config/addon:$XXE_ADDON_PATH
     extensions:
       - gnome-3-28
     plugs:

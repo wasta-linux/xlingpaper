@@ -6,7 +6,8 @@
 #   - Ensure default config is set.
 
 first_run=''
-xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
+# xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
+xxe_dir="/opt/xxe-perso-8_2_0"
 xxe_eula_name='XXEPersonalAndXLingPaperLicense'
 eula="${xxe_eula_name}.txt"
 
