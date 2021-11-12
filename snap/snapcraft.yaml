@@ -70,7 +70,6 @@ parts:
         - -runxxe*
         - -install4xxe*
         - -opt/xxe-perso-8_2_0/examples/My_XLingPaper
-        - -data-dir/*
     build-packages:
       - unzip
     override-build: |
@@ -142,6 +141,7 @@ parts:
   # Weed out any remaining unwanted files.
   cleanup: # very slow, ~2 or 3 min.
     after:
+      - lpr
       - texbin2020
       - wrapper
       - xlingpaper
@@ -152,6 +152,7 @@ parts:
         - -*.bat
         - -*.tar*
         - -*.zip
+        - -data-dir/*
     stage:
       - $excluded
     build-snaps: [core18, gnome-3-28-1804]
