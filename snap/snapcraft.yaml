@@ -64,10 +64,14 @@ parts:
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
     filesets:
       excluded:
+        - -*.bat
         - -**/*.bat
-        - -**/*.tar
-        - -**/*.zip
+        - -*.exe
         - -**/*.exe
+        - -*.tar
+        - -**/*.tar
+        - -*.zip
+        - -**/*.zip
         - -runxxe*
         - -install4xxe*
         - -opt/xxe-perso-8_2_0/examples/My_XLingPaper
