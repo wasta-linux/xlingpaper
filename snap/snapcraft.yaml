@@ -47,7 +47,7 @@ apps:
       - avahi-observe
       - cups
       - cups-control
-      - gedit
+      - gedit:gedit
       # - gedit-dbus
       - home
       - network
