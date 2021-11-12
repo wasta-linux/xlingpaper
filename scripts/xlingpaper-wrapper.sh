@@ -6,11 +6,9 @@
 #   - Ensure default config is set.
 
 first_run=''
-# xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
 xxe_dir="/opt/xxe-perso-8_2_0"
 xxe_eula_name='XXEPersonalAndXLingPaperLicense'
 eula="${xxe_eula_name}.txt"
-# eula="${xxe_eula_name}.pdf"
 
 # Ensure EULA in SNAP_USER_DATA.
 if [ ! -f "${SNAP_USER_DATA}/${eula}" ]; then
@@ -30,16 +28,12 @@ if [ ! -f "$example_file" ]; then
     cp "${xxe_dir}/examples/SamplePaper.xml" "$example_file"
 fi
 
-# Get EULA text; replace NBSP with normal space.
-# xxe_eula_text=$(sed -e 's/'$(echo "\xa0")'/ /g' "$xxe_ula_file")
-
 # Ensure that EULA has been accepted.
 accepted="${SNAP_USER_DATA}/.config/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
     first_run='YES'
-    # gedit "${SNAP_USER_DATA}/${eula}" &
     xdg-open "${SNAP_USER_DATA}/${eula}" &
-    eula_pid=$!
+    # eula_pid=$! # no useful PID with xdg-open
     sleep 0.5
     zenity --question --width=300 \
         --title="License Agreement" \
@@ -47,7 +41,7 @@ if [ ! -f "$accepted" ]; then
     if [ $? -eq 0 ]; then
         # User accepted.
         touch "$accepted"
-        kill "$eula_pid"
+        # kill "$eula_pid"
     else
         # User declined or cancelled.
         exit 1

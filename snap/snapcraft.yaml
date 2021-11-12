@@ -1,6 +1,6 @@
 name: xlingpaper
 base: core18
-version: '3.9' # '0.1+git'
+version: '3.9'
 summary: Produce linguistic documents with multiple outputs from one source document.
 description: |
   This is an unofficial package.
@@ -13,29 +13,20 @@ description: |
   * Extensive XHTML5 support, including the ability to convert a set of HTML pages (an “ebook”) to EPUB, PDF, Web Help, DOCX, etc.
 
 grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: strict # use 'strict' once you have the right plugs and slots
+confinement: strict
 architectures:
   - amd64
 layout:
-  /opt/xxe-perso-8_2_0:
+  /opt/xxe-perso-8_2_0: # for xlingpaper part
     symlink: $SNAP/opt/xxe-perso-8_2_0
-  # Fix resource problems from texbin2020 part.
-  /opt/texlivexlingpaper2020:
+  /opt/texlivexlingpaper2020: # for texbin2020 part
     symlink: $SNAP/opt/texlivexlingpaper2020
-  /usr/texbinxlingpaper2020:
+  /usr/texbinxlingpaper2020: # for texbin2020 part
     symlink: $SNAP/opt/texlivexlingpaper2020/bin/x86_64-linux
-  # Fix resource problem of zenity part.
-  /usr/share/zenity:
+  /usr/share/zenity: # for zenity part
     symlink: $SNAP/usr/share/zenity
-
-# # Adding plugs provided by other snaps:
-# # https://forum.snapcraft.io/t/using-chromium-ffmpeg-in-third-party-browser-snaps/6545
-# plugs:
-#   gedit:
-#     bus: session
-#     default-provider: gedit
-#     interface: dbus
-#     name: org.gnome.gedit
+  # /usr/bin/lpr: # for lpr part
+  #   symlink: $SNAP/usr/bin/lpr
 
 apps:
   xlingpaper:
@@ -50,7 +41,6 @@ apps:
       - avahi-observe
       - cups
       - cups-control
-      # - gedit
       - home
       - network
       - removable-media
@@ -61,6 +51,13 @@ parts:
     source: scripts
     organize:
       xlingpaper-wrapper.sh: bin/xlingpaper-wrapper.sh
+
+  lpr: # for java-based printing
+    plugin: nil
+    stage-packages:
+      - cups-bsd
+    prime:
+      - usr/bin/lpr
 
   xlingpaper:
     plugin: dump
@@ -74,7 +71,6 @@ parts:
         - -install4xxe*
         - -opt/xxe-perso-8_2_0/examples/My_XLingPaper
     build-packages:
-      # - pandoc
       - unzip
     override-build: |
       snapcraftctl build
@@ -114,10 +110,7 @@ parts:
     stage:
       - $excluded
     stage-packages:
-      # - gedit
       - openjdk-11-jre
-    # stage-snaps:
-    #   - gedit
 
   # https://software.sil.org/xlingpaper/xelatex-package-from-tex-live-2020/
   texbin2020:
