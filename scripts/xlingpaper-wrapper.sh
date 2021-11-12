@@ -9,7 +9,8 @@ first_run=''
 # xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
 xxe_dir="/opt/xxe-perso-8_2_0"
 xxe_eula_name='XXEPersonalAndXLingPaperLicense'
-eula="${xxe_eula_name}.txt"
+# eula="${xxe_eula_name}.txt"
+eula="${xxe_eula_name}.pdf"
 
 # Ensure EULA in SNAP_USER_DATA.
 if [ ! -f "${SNAP_USER_DATA}/${eula}" ]; then
@@ -36,7 +37,8 @@ fi
 accepted="${SNAP_USER_DATA}/.config/${xxe_eula_name}_accepted"
 if [ ! -f "$accepted" ]; then
     first_run='YES'
-    gedit "${SNAP_USER_DATA}/${eula}" &
+    # gedit "${SNAP_USER_DATA}/${eula}" &
+    xdg-open "${SNAP_USER_DATA}/${eula}" &
     eula_pid=$!
     sleep 0.5
     zenity --question --width=300 \

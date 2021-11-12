@@ -28,12 +28,14 @@ layout:
   /usr/share/zenity:
     symlink: $SNAP/usr/share/zenity
 
-plugs:
-  gedit:
-    bus: session
-    default-provider: gedit
-    interface: dbus
-    name: org.gnome.gedit
+# # Adding plugs provided by other snaps:
+# # https://forum.snapcraft.io/t/using-chromium-ffmpeg-in-third-party-browser-snaps/6545
+# plugs:
+#   gedit:
+#     bus: session
+#     default-provider: gedit
+#     interface: dbus
+#     name: org.gnome.gedit
 
 apps:
   xlingpaper:
@@ -48,7 +50,7 @@ apps:
       - avahi-observe
       - cups
       - cups-control
-      - gedit
+      # - gedit
       - home
       - network
       - removable-media
@@ -72,18 +74,20 @@ parts:
         - -install4xxe*
         - -opt/xxe-perso-8_2_0/examples/My_XLingPaper
     build-packages:
+      - pandoc
       - unzip
     override-build: |
       snapcraftctl build
-      # Part 1/6: Accept license: Handled by xlingpaper-wrapper.sh.
-      # chmod 555 XXEPersonalAndXLingPaperLicense.txt
+      xxe_base=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0
+      # Part 1/6: Accept license: Partly handled by xlingpaper-wrapper.sh.
+      # Convert EULA TXT to PDF.
+      pandoc ${xxe_base}/XXEPersonalAndXLingPaperLicense.txt -o ${xxe_base}/XXEPersonalAndXLingPaperLicense.pdf
 
       # Part 2/6: Install XXE Personal.
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XXE8-2Installer.tar
       unzip -oq $SNAPCRAFT_PART_BUILD/XXE8Installer/xxe-perso-8_2_0.zip -d $SNAPCRAFT_PART_INSTALL/opt
 
       # Part 3/6: Install XLingPaper config files.
-      xxe_base=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0
       addons=${xxe_base}/addon
       mkdir -p -m777 "$addons"
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/xlingpaperconfig-xxe7.tar -C $addons
@@ -112,8 +116,8 @@ parts:
     stage-packages:
       # - gedit
       - openjdk-11-jre
-    stage-snaps:
-      - gedit
+    # stage-snaps:
+    #   - gedit
 
   # https://software.sil.org/xlingpaper/xelatex-package-from-tex-live-2020/
   texbin2020:
