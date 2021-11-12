@@ -56,17 +56,18 @@ parts:
     plugin: nil
     stage-packages:
       - cups-bsd
-    prime:
-      - usr/bin/lpr
+    # prime:
+      # - usr/bin/lpr
 
   xlingpaper:
     plugin: dump
     source: https://software.sil.org/downloads/r/xlingpaper/XLingPaper-3-9-0XXEPersonalEditionFullSetup.tar.gz
     filesets:
       excluded:
-        - -*.bat
-        - -*.tar*
-        - -*.zip
+        - -**/*.bat
+        - -**/*.tar
+        - -**/*.zip
+        - -**/*.exe
         - -runxxe*
         - -install4xxe*
         - -opt/xxe-perso-8_2_0/examples/My_XLingPaper
@@ -139,6 +140,7 @@ parts:
       - usr/share/zenity/*
 
   # Weed out any remaining unwanted files.
+  # https://forum.snapcraft.io/t/reducing-the-size-of-desktop-snaps/17280
   cleanup: # very slow, ~2 or 3 min.
     after:
       - lpr
@@ -149,14 +151,13 @@ parts:
     plugin: nil
     filesets:
       excluded:
-        - -*.bat
-        - -*.tar*
-        - -*.zip
-        - -data-dir/*
+        - -**/*.bat
+        - -**/*.tar
+        - -**/*.zip
+        # - -data-dir/* # doesn't work: gnome files are added after prime, it seems
     prime:
       - $excluded
     build-snaps: [core18, gnome-3-28-1804]
-    #  This step taken from firefox's snapcraft.yaml.
     override-prime: |
       set -eux
       for snap in "core18" "gnome-3-28-1804"; do
