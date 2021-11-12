@@ -138,9 +138,9 @@ parts:
     plugin: nil
     filesets:
       excluded:
+        - -*.bat
         - -*.tar*
         - -*.zip
-        - -opt/texlivexlingpaper2020
     stage:
       - $excluded
     build-snaps: [core18, gnome-3-28-1804]
