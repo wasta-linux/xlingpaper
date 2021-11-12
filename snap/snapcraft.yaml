@@ -28,11 +28,12 @@ layout:
   /usr/share/zenity:
     symlink: $SNAP/usr/share/zenity
 
-# plugs:
-#   gedit-dbus:
-#     bus: session
-#     interface: dbus
-#     name: org.gnome.gedit
+plugs:
+  gedit:
+    bus: session
+    default-provider: gedit
+    interface: dbus
+    name: org.gnome.gedit
 
 apps:
   xlingpaper:
@@ -47,8 +48,7 @@ apps:
       - avahi-observe
       - cups
       - cups-control
-      - gedit:gedit
-      # - gedit-dbus
+      - gedit
       - home
       - network
       - removable-media
