@@ -9,8 +9,8 @@ first_run=''
 # xxe_dir="${SNAP}/opt/xxe-perso-8_2_0"
 xxe_dir="/opt/xxe-perso-8_2_0"
 xxe_eula_name='XXEPersonalAndXLingPaperLicense'
-# eula="${xxe_eula_name}.txt"
-eula="${xxe_eula_name}.pdf"
+eula="${xxe_eula_name}.txt"
+# eula="${xxe_eula_name}.pdf"
 
 # Ensure EULA in SNAP_USER_DATA.
 if [ ! -f "${SNAP_USER_DATA}/${eula}" ]; then

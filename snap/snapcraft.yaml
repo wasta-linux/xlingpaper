@@ -74,14 +74,14 @@ parts:
         - -install4xxe*
         - -opt/xxe-perso-8_2_0/examples/My_XLingPaper
     build-packages:
-      - pandoc
+      # - pandoc
       - unzip
     override-build: |
       snapcraftctl build
       xxe_base=$SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0
       # Part 1/6: Accept license: Partly handled by xlingpaper-wrapper.sh.
       # Convert EULA TXT to PDF.
-      pandoc ${xxe_base}/XXEPersonalAndXLingPaperLicense.txt -o ${xxe_base}/XXEPersonalAndXLingPaperLicense.pdf
+      # pandoc ${xxe_base}/XXEPersonalAndXLingPaperLicense.txt -o ${xxe_base}/XXEPersonalAndXLingPaperLicense.pdf
 
       # Part 2/6: Install XXE Personal.
       tar --overwrite -xjf $SNAPCRAFT_PART_BUILD/XXE8-2Installer.tar
