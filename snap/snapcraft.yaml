@@ -109,7 +109,9 @@ parts:
       - openjdk-11-jre
 
   # https://software.sil.org/xlingpaper/xelatex-package-from-tex-live-2020/
-  texbin2020: # probably needed eventually
+  texbin2020:
+    after:
+      - xlingpaper
     plugin: dump
     source: http://software.sil.org/downloads/r/xlingpaper/resources/xelatex-upgrade/XeLaTeX2020Installer.tar.gz
     override-build: |
@@ -128,8 +130,7 @@ parts:
       - usr/bin/zenity
       - usr/share/zenity/*
 
-  # Find files provided by the base and platform snap and ensure they aren't
-  # duplicated in this snap
+  # Weed out any remaining unwanted files.
   cleanup: # very slow, ~2 or 3 min.
     after:
       - texbin2020
@@ -145,6 +146,7 @@ parts:
     stage:
       - $excluded
     build-snaps: [core18, gnome-3-28-1804]
+    #  This step taken from firefox's snapcraft.yaml.
     override-prime: |
       set -eux
       for snap in "core18" "gnome-3-28-1804"; do
