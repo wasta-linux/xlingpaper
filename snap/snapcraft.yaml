@@ -118,7 +118,9 @@ parts:
       snapcraftctl build
       mkdir -p -m777 $SNAPCRAFT_PART_INSTALL/opt
       tar --overwrite -xzf $SNAPCRAFT_PART_INSTALL/texlivexlingpaper2020.tar -C $SNAPCRAFT_PART_INSTALL/opt
-      echo "2020" > $SNAPCRAFT_PART_INSTALL/opt/xxe-perso-8_2_0/addon/XLingPap/configuration/XeLaTeXVersion.txt
+    override-prime: |
+      snapcraftctl prime
+      echo "2020" > opt/xxe-perso-8_2_0/addon/XLingPap/configuration/XeLaTeXVersion.txt
 
   # Integrate custom dialogs in your snap - doc - snapcraft.io
   # https://forum.snapcraft.io/t/integrate-custom-dialogs-in-your-snap/10825
