@@ -153,7 +153,7 @@ parts:
         - -*.tar*
         - -*.zip
         - -data-dir/*
-    stage:
+    prime:
       - $excluded
     build-snaps: [core18, gnome-3-28-1804]
     #  This step taken from firefox's snapcraft.yaml.
