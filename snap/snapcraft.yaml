@@ -25,8 +25,8 @@ layout:
     symlink: $SNAP/opt/texlivexlingpaper2020/bin/x86_64-linux
   /usr/share/zenity: # for zenity part
     symlink: $SNAP/usr/share/zenity
-  # /usr/bin/lpr: # for lpr part
-  #   symlink: $SNAP/usr/bin/lpr
+  /usr/bin/lpr: # for lpr part
+    symlink: $SNAP/usr/bin/lpr
 
 apps:
   xlingpaper:
