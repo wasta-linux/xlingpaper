@@ -14,6 +14,8 @@ description: |
 
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
+architectures:
+  - amd64
 layout:
   /opt/xxe-perso-8_2_0:
     symlink: $SNAP/opt/xxe-perso-8_2_0
@@ -42,7 +44,10 @@ apps:
     extensions:
       - gnome-3-28
     plugs:
+      - avahi-observe
+      - cups
       - cups-control
+      - gedit
       # - gedit-dbus
       - home
       - network
@@ -105,8 +110,10 @@ parts:
     stage:
       - $excluded
     stage-packages:
-      - gedit
+      # - gedit
       - openjdk-11-jre
+    stage-snaps:
+      - gedit
 
   # https://software.sil.org/xlingpaper/xelatex-package-from-tex-live-2020/
   texbin2020:
