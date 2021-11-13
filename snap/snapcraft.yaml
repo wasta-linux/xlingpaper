@@ -135,7 +135,7 @@ parts:
       xlp_batch=${xlp_dir}/batchfiles
       cp ${xlp_config}/XeLaTeXVersion2020.txt ${xlp_config}/XeLaTeXVersion.txt
       cp ${xlp_batch}/DoTeXPDF2020 ${xlp_batch}/DoTeXPDF
-      cp ${xlp_batch}/HasXeLaTeX2020 ${xlp_batch}/HasXeLaTeX2020
+      cp ${xlp_batch}/HasXeLaTeX2020 ${xlp_batch}/HasXeLaTeX
 
   # Integrate custom dialogs in your snap - doc - snapcraft.io
   # https://forum.snapcraft.io/t/integrate-custom-dialogs-in-your-snap/10825
