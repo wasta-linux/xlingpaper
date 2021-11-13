@@ -132,7 +132,7 @@ parts:
       snapcraftctl prime
       xlp_dir=opt/xxe-perso-8_2_0/addon/XLingPap
       xlp_config=${xlp_dir}/configuration
-      xlp_batch=${xlp_dir}/batch
+      xlp_batch=${xlp_dir}/batchfiles
       cp ${xlp_config}/XeLaTeXVersion2020.txt ${xlp_config}/XeLaTeXVersion.txt
       cp ${xlp_batch}/DoTeXPDF2020 ${xlp_batch}/DoTeXPDF
       cp ${xlp_batch}/HasXeLaTeX2020 ${xlp_batch}/HasXeLaTeX2020
